@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Mitra Sangha Club — Mobile Optimized UI Demo</title>
+<style>
+:root{--wine:#74142f;--wine2:#951d42;--gold:#c99a38;--ink:#281c20;--muted:#75666b;--paper:#fffaf6;--line:#eadfe1;--green:#176b45;--soft:#f8eef1}
+*{box-sizing:border-box}body{margin:0;background:#f8f5f2;color:var(--ink);font:15px/1.45 Inter,system-ui,-apple-system,Segoe UI,sans-serif}
+button,input,select{font:inherit}button{cursor:pointer}
+.top{height:76px;background:#fff;display:flex;align-items:center;gap:18px;padding:0 24px;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+.brandmark{width:46px;height:46px;border-radius:50%;background:var(--wine);color:#f8d98b;display:grid;place-items:center;font-size:24px;border:2px solid var(--gold)}
+.brand h1{font:700 21px Georgia;margin:0;color:var(--wine);letter-spacing:.3px;white-space:nowrap}.brand small{color:var(--muted)}
+.spacer{flex:1}.pill{border:1px solid var(--line);background:#fff;border-radius:18px;padding:9px 13px;color:var(--wine)}
+.layout{display:flex;min-height:calc(100vh - 76px)}.side{width:245px;background:#fff;border-right:1px solid var(--line);padding:18px 12px;transition:.2s}.side.hide{width:0;padding:0;overflow:hidden;border:0}
+.nav{display:flex;align-items:center;gap:12px;width:100%;border:0;background:transparent;padding:13px 14px;border-radius:12px;text-align:left;color:#4b3b41;margin:3px 0}.nav:hover{background:#f8eef1}.nav.active{background:var(--wine);color:white;box-shadow:0 5px 14px #74142f22}.nav .ico{width:22px;text-align:center;font-size:18px}.nav.adminnav{margin-top:20px;border-top:1px solid var(--line);padding-top:20px}
+main{flex:1;min-width:0;padding:26px clamp(14px,3vw,34px)}.heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px}.heading h2{font:700 30px Georgia;color:var(--wine);margin:0}.sub{color:var(--muted)}.switch{display:flex;background:#f1e5e8;border-radius:13px;padding:4px;margin:0 0 20px}.switch button{flex:1;border:0;background:transparent;padding:12px;border-radius:10px;color:var(--wine);font-weight:650}.switch button.active{background:var(--wine);color:#fff;box-shadow:0 3px 9px #74142f20}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:20px}.metric{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 5px 16px #3b172008}.metric .label{color:var(--muted);font-size:13px}.metric strong{display:block;font-size:26px;margin-top:8px;color:var(--wine)}.metric.green strong{color:var(--green)}
+.grid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(270px,1fr);gap:18px}.panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:18px;box-shadow:0 5px 16px #3b172008}.panelhead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}.panel h3{margin:0;color:var(--wine);font:700 19px Georgia}.link{border:0;background:none;color:var(--wine);font-weight:600}
+table{width:100%;border-collapse:collapse;white-space:nowrap}th{text-align:left;color:#75666b;font-size:12px;background:#fbf6f7;padding:11px 9px}td{padding:12px 9px;border-bottom:1px solid #f0e8ea;font-size:13px}tr:last-child td{border-bottom:0}.amount{font-weight:700;color:var(--green)}.receiver{color:#6c4d58}.formrow{margin-bottom:12px}.formrow label{display:block;font-size:13px;font-weight:650;margin-bottom:6px}.formrow input,.formrow select{width:100%;border:1px solid #ded0d5;border-radius:9px;padding:11px;background:#fff}.btn{border:0;background:var(--wine);color:white;border-radius:10px;padding:12px 16px;font-weight:650;width:100%}.btn:hover{background:var(--wine2)}.note{font-size:12px;color:var(--muted);margin-top:10px}.hidden{display:none!important}.publicbanner{background:#fff4df;border:1px solid #efd8a6;padding:11px 14px;border-radius:12px;margin-bottom:18px;color:#73531c;font-size:13px}
+.adminbox{background:#fff;border:1px solid var(--line);border-radius:15px;padding:18px;margin-bottom:16px}.adminbox h3{margin:0 0 12px;color:var(--wine)}.adminrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.adminrow input,.adminrow select{padding:10px;border:1px solid var(--line);border-radius:9px;flex:1;min-width:130px}.adminrow button{padding:10px 14px;border:0;background:var(--wine);color:#fff;border-radius:9px}
+.menuwrap{position:relative}.dots{font-size:22px;line-height:1;width:42px;height:42px;border:1px solid var(--line);border-radius:12px;background:white;color:var(--wine)}.popup{position:absolute;right:0;top:48px;background:#fff;border:1px solid var(--line);border-radius:13px;box-shadow:0 12px 30px #2a0d1620;width:220px;padding:7px;z-index:10}.popup button{width:100%;border:0;background:#fff;text-align:left;padding:11px;border-radius:8px;color:#44333a}.popup button:hover{background:var(--soft)}.footer{color:#9a8b90;text-align:center;font-size:12px;padding:20px}
+@media(max-width:850px){.side{position:fixed;top:76px;bottom:0;z-index:6;box-shadow:8px 0 25px #30121b12}.side.hide{width:0}.grid{grid-template-columns:1fr}.cards{grid-template-columns:1fr 1fr}.heading h2{font-size:25px}}
+@media(max-width:520px){.top{padding:0 8px;gap:7px}.brand h1{font-size:15px}.brand small{font-size:11px}.heading{align-items:flex-start;flex-direction:column}.cards{grid-template-columns:1fr}.metric{padding:14px}.metric strong{font-size:23px}.panel{padding:13px;overflow-x:auto}.switch button{font-size:12px;padding:10px 5px}main{padding:18px 12px}}
+
+/* Mobile stability update */
+html{width:100%;max-width:100%;overflow-x:hidden;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{width:100%;max-width:100%;overflow-x:hidden;touch-action:pan-y}
+img,svg,video,canvas{max-width:100%;height:auto}
+input,select,textarea,button{font-size:16px}
+main,.layout,.grid,.panel{min-width:0}
+table{min-width:560px}
+@media(max-width:520px){
+  .top{height:68px}
+  .side{top:68px;max-width:85vw}
+  .layout{min-height:calc(100vh - 68px)}
+  main{width:100%;max-width:100%;overflow-x:hidden}
+  .heading select{max-width:100%}
+  .panel{max-width:100%}
+}
+
+
+/* Table area: horizontal + vertical touch scrolling */
+.table-scroll{display:block;width:100%;max-width:100%;overflow-x:auto;overflow-y:auto;height: min(58vh, 520px);
+  -webkit-overflow-scrolling:touch;overscroll-behavior:contain;touch-action:pan-x pan-y; 
+  border-radius:10px;scrollbar-width:thin}
+.table-scroll table{min-width:760px;min-height:100%;}
+.table-scroll th{position:sticky;top:0;z-index:1}
+@media(max-width:520px){.table-scroll{max-height:55vh}.table-scroll table{min-width:760px;min-height:100%;}}
+
+
+.table-scroll::-webkit-scrollbar{width:7px;height:7px}
+.table-scroll::-webkit-scrollbar-thumb{background:#c7a7b2;border-radius:8px}
+.table-scroll::-webkit-scrollbar-track{background:#f8eef1}
+.table-scroll:focus{outline:2px solid #c99a38;outline-offset:2px}
+\n
+/* FINAL mobile table presentation: scroll the page, not a nested table viewport */
+.table-scroll{display:block;width:100%;max-width:100%;height:auto;max-height:none;overflow:visible;
+  -webkit-overflow-scrolling:auto;overscroll-behavior:auto;touch-action:auto;border-radius:10px}
+.table-scroll table{width:100%;min-width:0;min-height:0;table-layout:auto}
+.table-scroll th{position:static}
+@media(max-width:650px){
+ .table-scroll table,.table-scroll tbody,.table-scroll tr,.table-scroll td{display:block;width:100%}
+ .table-scroll thead{display:none}
+ .table-scroll tr{padding:10px 12px;border:1px solid #eee3e7;border-radius:12px;margin:0 0 10px;background:#fff}
+ .table-scroll td{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;
+   white-space:normal;padding:7px 0;border:0;font-size:14px;text-align:right}
+ .table-scroll td:before{font-weight:650;color:#75666b;text-align:left;flex:0 0 92px}
+ .table-scroll td:nth-child(1):before{content:"Member"}
+ .table-scroll td:nth-child(2):before{content:"Amount"}
+ .table-scroll td:nth-child(3):before{content:"Date"}
+ .table-scroll td:nth-child(4):before{content:"Received By"}
+ .table-scroll td:nth-child(1){text-align:right}
+}
+
+</style></head>
+<body>
+<header class="top">
+<button class="dots" id="menuBtn" aria-label="Navigation">☰</button>
+<div class="brandmark">✦</div><div class="brand"><h1>MITRA SANGHA CLUB</h1><small>Community · Transparent Accounts</small></div>
+<div class="spacer"></div><span class="pill" id="viewBadge">Public View</span>
+<div class="menuwrap"><button class="dots" id="moreBtn" aria-label="More">⋮</button><div class="popup hidden" id="popup">
+<button data-page="dashboard">▦ &nbsp; Dashboard</button><button data-page="members">♙ &nbsp; Members</button><button data-page="puja">✦ &nbsp; Kali Puja Chanda</button><button data-page="monthly">▣ &nbsp; Club Monthly Chanda</button><button data-page="expenses">₹ &nbsp; Expenses</button><button data-page="reports">▤ &nbsp; Reports</button><hr><button data-page="admin">⚙ &nbsp; Admin Panel</button>
+</div></div>
+</header>
+<div class="layout">
+<aside class="side hide" id="side">
+<button class="nav active" data-page="dashboard"><span class="ico">▦</span>Dashboard</button>
+<button class="nav" data-page="members"><span class="ico">♙</span>Members</button>
+<button class="nav" data-page="puja"><span class="ico">✦</span>Kali Puja Chanda</button>
+<button class="nav" data-page="monthly"><span class="ico">▣</span>Club Monthly Chanda</button>
+<button class="nav" data-page="expenses"><span class="ico">₹</span>Expenses</button>
+<button class="nav" data-page="reports"><span class="ico">▤</span>Reports</button>
+<button class="nav adminnav hidden" data-page="admin" id="adminNav"><span class="ico">⚙</span>Admin Management</button>
+</aside>
+<main id="content">
+<div class="publicbanner">Public transparency dashboard · Demo data shown below. Real member data requires a secure shared database.</div>
+<div class="heading"><div><h2>Dashboard</h2><div class="sub">Overview of Kali Puja Chanda</div></div><select class="pill"><option>Kali Puja 2026</option><option>Kali Puja 2027</option></select></div>
+<div class="switch"><button class="active" data-mode="puja">✦ Kali Puja Chanda</button><button data-mode="monthly">▣ Club Monthly Chanda</button></div>
+<div class="cards"><div class="metric"><div class="label">Total Collected</div><strong id="collected">₹1,28,500</strong></div><div class="metric"><div class="label">Expenses</div><strong id="spent">₹18,200</strong></div><div class="metric green"><div class="label">Balance</div><strong id="balance">₹1,10,300</strong></div></div>
+<div class="grid"><section>
+<div class="panel"><div class="panelhead"><h3 id="recentTitle">Recent Kali Puja Collections</h3><button class="link" data-page="reports">View all →</button></div><div class="table-scroll" aria-label="Recent chanda collections table"><table><thead><tr><th>Member</th><th>Amount</th><th>Date</th><th>Received By</th></tr></thead><tbody id="rows"></tbody></table></div></div>
+<div class="panel"><div class="panelhead"><h3>Latest Activities</h3></div><div id="activity" class="sub">Collection added · Expense recorded · Member updated</div></div>
+</section>
+<aside><div class="panel" id="entryPanel"><div class="panelhead"><h3>Add Chanda Entry</h3></div><form id="entryForm">
+<div class="formrow"><label>Member *</label><select id="memberSelect" required><option value="">Select Member</option><option>Arindam Das (MSC-014)</option><option>Riya Sen (MSC-008)</option><option>Suman Roy (MSC-021)</option><option>Debjit Ghosh (MSC-003)</option><option>Rahul Pal (MSC-017)</option></select></div>
+<div class="formrow"><label>Amount (₹) *</label><input id="amount" type="number" min="1" placeholder="Enter amount" required></div>
+<div class="formrow"><label>Date *</label><input id="date" type="date" required></div>
+<div class="formrow"><label>Received By *</label><select id="receiver" required><option value="">Select Admin / Secretary</option><option>Admin Manu</option><option>Secretary Amit</option><option>Assistant Secretary Bilab</option></select></div>
+<button class="btn">Add Collection</button><div class="note">Entry form is illustrative in this public demo. Admin login/backend will activate secure collection entry.</div>
+</form></div></aside></div>
+<div class="footer">Mitra Sangha Club · Demo UI · Public transparency</div>
+</main></div>
+<script>
+const sample=[['Arindam Das (MSC-014)','₹500','06 Nov 2026','Secretary Amit'],['Riya Sen (MSC-008)','₹1,000','05 Nov 2026','Asst. Secretary Bilab'],['Suman Roy (MSC-021)','₹300','04 Nov 2026','Admin Manu'],['Debjit Ghosh (MSC-003)','₹500','03 Nov 2026','Secretary Amit'],['Rahul Pal (MSC-017)','₹500','02 Nov 2026','Admin Manu']];
+let mode='puja',page='dashboard',admin=false;
+const rows=document.getElementById('rows');
+function renderRows(){rows.innerHTML=sample.map(r=>`<tr><td><b>${r[0]}</b></td><td class="amount">${r[1]}</td><td>${r[2]}</td><td class="receiver">${r[3]}</td></tr>`).join('')}
+function setMode(m){mode=m;document.querySelectorAll('[data-mode]').forEach(b=>b.classList.toggle('active',b.dataset.mode===m));document.getElementById('recentTitle').textContent=m==='puja'?'Recent Kali Puja Collections':'Recent Monthly Chanda Collections';document.querySelector('.sub').textContent=m==='puja'?'Overview of Kali Puja Chanda':'Overview of Club Monthly Chanda';document.getElementById('collected').textContent=m==='puja'?'₹1,28,500':'₹42,000';document.getElementById('spent').textContent=m==='puja'?'₹18,200':'₹5,400';document.getElementById('balance').textContent=m==='puja'?'₹1,10,300':'₹36,600'}
+function go(p){if(p==='admin'&&!admin){alert('Admin-only area. Demo preview: use Admin Preview switch below.');return}page=p;document.querySelectorAll('.nav').forEach(b=>b.classList.toggle('active',b.dataset.page===p));document.getElementById('popup').classList.add('hidden');if(p==='dashboard'){document.querySelector('.switch').classList.remove('hidden');document.querySelector('.cards').classList.remove('hidden');document.querySelector('.grid').classList.remove('hidden')}else{document.querySelector('.switch').classList.add('hidden');document.querySelector('.cards').classList.add('hidden');document.querySelector('.grid').classList.add('hidden');document.querySelector('.heading h2').textContent=({members:'Members',puja:'Kali Puja Chanda',monthly:'Club Monthly Chanda',expenses:'Expenses',reports:'Reports',admin:'Admin Management'})[p]||p;document.querySelector('.sub').textContent=p==='admin'?'Owner-controlled admin access (preview)':'Section preview';document.querySelector('.panel').innerHTML=`<h3>${document.querySelector('.heading h2').textContent}</h3><p class="sub">This section will be implemented in the secure final system.</p>`}}
+document.getElementById('menuBtn').onclick=()=>document.getElementById('side').classList.toggle('hide');
+document.getElementById('moreBtn').onclick=e=>{e.stopPropagation();document.getElementById('popup').classList.toggle('hidden')};
+document.addEventListener('click',e=>{if(!e.target.closest('.menuwrap'))document.getElementById('popup').classList.add('hidden')});
+document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>go(b.dataset.page));
+document.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>setMode(b.dataset.mode));
+document.getElementById('entryForm').onsubmit=e=>{e.preventDefault();alert('Demo only: secure admin login and database are required to save real entries.')};
+renderRows();document.getElementById('date').value=new Date().toISOString().slice(0,10);
+</script></body></html>
